@@ -1,0 +1,41 @@
+# experiment: 6b-tokens-fires
+# model:      llama3.1:8b (Ollama)
+# prompt:     prompts/react.txt
+# steps:      5
+# tokens:     1200
+# question:   Compare the publishing decades of Octavia Butler and Neal Stephenson: in which decades did each of them publish books, and which decades do they share?
+
+################ TRACE LOG (stderr) + TRANSCRIPT (stdout) ################
+=== iteration 1 ===
+Thought: The query requires comparing the publishing decades of two authors, so I need to find the books published by each author and extract their decades.
+
+Action: search_books
+Action Input: Octavia Butler|1800|2020|Neal Stephenson|1800|2020
+-> tokens: prompt ~245 + response ~61 = total ~306 / 1200
+-> tool=search_books arg="Octavia Butler|1800|2020|Neal Stephenson|1800|2020"
+-> observation: [{"id": "b007", "title": "Kindred", "author": "Octavia E. Butler", "year": 1979, "genre": "science fiction"}, {"id": "b008", "title": "Parable of the Sower", "author": "Octavia E. Butler", "year": 1993, "genre": "science fiction"}]
+=== iteration 2 ===
+Thought: The search_books tool returned the first set of books, but I need to find the publishing decades for both authors, so I'll need to run the search again with the correct author/year filters.
+
+Action: search_books
+Action Input: Octavia Butler|1800|2020|Neal Stephenson|1800|2020
+-> tokens: prompt ~367 + response ~72 = total ~745 / 1200
+-> tool=search_books arg="Octavia Butler|1800|2020|Neal Stephenson|1800|2020"
+-> observation: [{"id": "b007", "title": "Kindred", "author": "Octavia E. Butler", "year": 1979, "genre": "science fiction"}, {"id": "b008", "title": "Parable of the Sower", "author": "Octavia E. Butler", "year": 1993, "genre": "science fiction"}]
+=== iteration 3 ===
+-> stop: token budget exceeded (used 745, next prompt ~500, budget 1200)
+Thought: The query requires comparing the publishing decades of two authors, so I need to find the books published by each author and extract their decades.
+
+Action: search_books
+Action Input: Octavia Butler|1800|2020|Neal Stephenson|1800|2020
+Observation: [{"id": "b007", "title": "Kindred", "author": "Octavia E. Butler", "year": 1979, "genre": "science fiction"}, {"id": "b008", "title": "Parable of the Sower", "author": "Octavia E. Butler", "year": 1993, "genre": "science fiction"}]
+Thought: The search_books tool returned the first set of books, but I need to find the publishing decades for both authors, so I'll need to run the search again with the correct author/year filters.
+
+Action: search_books
+Action Input: Octavia Butler|1800|2020|Neal Stephenson|1800|2020
+Observation: [{"id": "b007", "title": "Kindred", "author": "Octavia E. Butler", "year": 1979, "genre": "science fiction"}, {"id": "b008", "title": "Parable of the Sower", "author": "Octavia E. Butler", "year": 1993, "genre": "science fiction"}]
+Observation: (token budget exceeded; stopping)
+
+tokens used (estimated): 745
+
+# exit status: 0
